@@ -54,4 +54,20 @@ class LengthTest {
 
         assertFalse(firstLength.isShorterThan(secondLength));
     }
+
+    @Test
+    void should_return_false_when_compare_equals_given_first_length_different_with_second() {
+        Length firstLength = new Length(5);
+        Length secondLength = new Length(1);
+
+        assertFalse(firstLength.isEqualTo(secondLength));
+    }
+
+    @Test
+    void should_return_true_when_compare_equals_given_first_length_same_with_second() {
+        Length firstLength = new Length(5);
+        Length secondLength = new Length(5);
+
+        assertTrue(firstLength.isEqualTo(secondLength));
+    }
 }

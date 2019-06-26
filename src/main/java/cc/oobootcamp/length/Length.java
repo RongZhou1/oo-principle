@@ -22,4 +22,8 @@ public class Length {
         }
         return result;
     }
+
+    public boolean isEqualTo(Length length) {
+        return this.value == length.value;
+    }
 }
