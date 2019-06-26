@@ -8,19 +8,11 @@ public class Length {
     }
 
     public boolean isLongerThan(Length length) {
-        boolean result = false;
-        if (this.value > length.value) {
-            result = true;
-        }
-        return result;
+        return this.value > length.value;
     }
 
     public boolean isShorterThan(Length length) {
-        boolean result = false;
-        if (this.value < length.value) {
-            result = true;
-        }
-        return result;
+        return this.value < length.value;
     }
 
     public boolean isEqualTo(Length length) {
