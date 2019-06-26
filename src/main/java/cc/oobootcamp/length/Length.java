@@ -15,4 +15,11 @@ public class Length {
         return result;
     }
 
+    public boolean isShorterThan(Length length) {
+        boolean result = false;
+        if (this.value < length.value) {
+            result = true;
+        }
+        return result;
+    }
 }
