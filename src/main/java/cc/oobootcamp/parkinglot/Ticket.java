@@ -1,4 +1,13 @@
 package cc.oobootcamp.parkinglot;
 
-public class Ticket {
+class Ticket {
+    private String validationCode;
+
+    public Ticket(String validationCode) {
+        this.validationCode = validationCode;
+    }
+
+    String getValidationCode() {
+        return validationCode;
+    }
 }
