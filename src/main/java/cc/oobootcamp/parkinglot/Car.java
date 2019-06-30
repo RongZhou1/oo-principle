@@ -1,4 +1,4 @@
 package cc.oobootcamp.parkinglot;
 
-class Car {
+public class Car {
 }

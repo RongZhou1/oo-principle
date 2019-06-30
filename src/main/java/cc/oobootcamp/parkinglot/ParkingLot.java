@@ -1,86 +1,42 @@
 package cc.oobootcamp.parkinglot;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import static java.util.UUID.randomUUID;
-import static java.util.stream.IntStream.range;
+public class ParkingLot {
 
-class ParkingLot {
-    private static final String TICKET_INVALID = "Invalid ticket.";
-    private static final String PICK_UP_SUCCEED = "Successfully.";
-    private static final String PARKING_FAILED_MESSAGE = "No enough space.";
-    private static final String PARKING_SUCCEED_MESSAGE = "Parking successfully, pick up your ticket.";
+    private int totalSpace;
+    private Map<Ticket, Car> parkedCars;
 
-    private int spaceInUse;
-    private int spaceAvailable;
-    private List<Ticket> tickets;
-    private String verificationCode;
-
-    public ParkingLot(int spaceInUse, int spaceAvailable) {
-        this.spaceInUse = spaceInUse;
-        this.spaceAvailable = spaceAvailable;
-        this.tickets = new ArrayList<>();
-        range(0, spaceInUse)
-                .forEach(i -> this.tickets.add(generateTicket()));
-        this.verificationCode = randomUUID().toString();
+    public ParkingLot(int totalSpace) {
+        this.totalSpace = totalSpace;
+        this.parkedCars = new HashMap<>();
     }
 
-    private Ticket generateTicket() {
-        return new Ticket(verificationCode);
+    public Ticket park(Car car) {
+        if (hasAvailableSpace()) {
+            Ticket ticket = new Ticket();
+            parkedCars.put(ticket, car);
+
+            return ticket;
+        } else {
+            throw new NoSpaceAvailableException();
+        }
     }
 
-    public String park(Car car) {
-        return hasAvailableCarSpace() ? parkSucceed() : parkFailed();
+    public Car pick(Ticket ticket) {
+        if (isCarParkedIn(ticket)) {
+            return parkedCars.remove(ticket);
+        } else {
+            throw new CarNotMatchException();
+        }
     }
 
-    private boolean hasAvailableCarSpace() {
-        return this.spaceAvailable > 0;
+    private boolean hasAvailableSpace() {
+        return totalSpace - parkedCars.size() > 0;
     }
 
-    private String parkSucceed() {
-        this.spaceInUse++;
-        this.spaceAvailable--;
-        tickets.add(generateTicket());
-        return PARKING_SUCCEED_MESSAGE;
-    }
-
-    private String parkFailed() {
-        return PARKING_FAILED_MESSAGE;
-    }
-
-    public String pickUpCar(Ticket ticket) {
-        return isValidTicket(ticket) ? pickUpSucceed() : pickUpFailed();
-    }
-
-    private boolean isValidTicket(Ticket ticket) {
-        return this.verificationCode.equals(ticket.getValidationCode());
-    }
-
-    private String pickUpSucceed() {
-        this.spaceInUse--;
-        this.spaceAvailable++;
-        this.tickets.remove(0);
-        return PICK_UP_SUCCEED;
-    }
-
-    private String pickUpFailed() {
-        return TICKET_INVALID;
-    }
-
-    public int getSpaceInUse() {
-        return spaceInUse;
-    }
-
-    public int getSpaceAvailable() {
-        return spaceAvailable;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public String getVerificationCode() {
-        return verificationCode;
+    private boolean isCarParkedIn(Ticket ticket) {
+        return parkedCars.containsKey(ticket);
     }
 }
