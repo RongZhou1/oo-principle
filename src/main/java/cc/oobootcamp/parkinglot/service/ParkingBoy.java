@@ -23,4 +23,12 @@ public abstract class ParkingBoy {
                 .map(parkingLot -> parkingLot.pick(ticket))
                 .orElseThrow(CarNotMatchException::new);
     }
+
+    boolean hasAvailableSpace() {
+        return parkingLots.stream().anyMatch(i -> i.getAvailableSpace() > 0);
+    }
+
+    boolean isCarParkedByMe(Ticket ticket) {
+        return parkingLots.stream().anyMatch(i -> i.isCarParkedIn(ticket));
+    }
 }
