@@ -32,11 +32,11 @@ public class ParkingLot {
         }
     }
 
-    private boolean hasAvailableSpace() {
+    boolean hasAvailableSpace() {
         return totalSpace - parkedCars.size() > 0;
     }
 
-    private boolean isCarParkedIn(Ticket ticket) {
+    boolean isCarParkedIn(Ticket ticket) {
         return parkedCars.containsKey(ticket);
     }
 }
