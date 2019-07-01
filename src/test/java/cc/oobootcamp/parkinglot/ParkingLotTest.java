@@ -1,5 +1,10 @@
 package cc.oobootcamp.parkinglot;
 
+import cc.oobootcamp.parkinglot.exception.CarNotMatchException;
+import cc.oobootcamp.parkinglot.exception.NoSpaceAvailableException;
+import cc.oobootcamp.parkinglot.model.Car;
+import cc.oobootcamp.parkinglot.model.Ticket;
+import cc.oobootcamp.parkinglot.service.ParkingLot;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertNotNull;

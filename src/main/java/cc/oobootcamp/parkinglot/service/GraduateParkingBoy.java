@@ -1,11 +1,15 @@
-package cc.oobootcamp.parkinglot;
+package cc.oobootcamp.parkinglot.service;
+
+import cc.oobootcamp.parkinglot.exception.NoSpaceAvailableException;
+import cc.oobootcamp.parkinglot.model.Car;
+import cc.oobootcamp.parkinglot.model.Ticket;
 
 import java.util.List;
 
 public class GraduateParkingBoy extends ParkingBoy {
 
 
-    protected GraduateParkingBoy(List<ParkingLot> parkingLots) {
+    public GraduateParkingBoy(List<ParkingLot> parkingLots) {
         super(parkingLots);
     }
 

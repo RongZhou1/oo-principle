@@ -1,4 +1,9 @@
-package cc.oobootcamp.parkinglot;
+package cc.oobootcamp.parkinglot.service;
+
+import cc.oobootcamp.parkinglot.exception.CarNotMatchException;
+import cc.oobootcamp.parkinglot.exception.NoSpaceAvailableException;
+import cc.oobootcamp.parkinglot.model.Car;
+import cc.oobootcamp.parkinglot.model.Ticket;
 
 import java.util.HashMap;
 import java.util.Map;
