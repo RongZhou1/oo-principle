@@ -2,22 +2,14 @@ package cc.oobootcamp.parkinglot;
 
 import java.util.List;
 
-public class ParkingBoy {
-    private List<ParkingLot> parkingLots;
+public abstract class ParkingBoy {
+    protected List<ParkingLot> parkingLots;
 
-    public ParkingBoy(List<ParkingLot> parkingLots) {
+    protected ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
 
-
-    public Ticket park(Car car) {
-        return parkingLots
-                .stream()
-                .filter(ParkingLot::hasAvailableSpace)
-                .findFirst()
-                .map(parkingLot -> parkingLot.park(car))
-                .orElseThrow(NoSpaceAvailableException::new);
-    }
+    public abstract Ticket park(Car car);
 
     public Car pick(Ticket ticket) {
         return parkingLots

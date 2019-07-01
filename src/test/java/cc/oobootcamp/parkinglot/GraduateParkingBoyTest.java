@@ -8,16 +8,16 @@ import static junit.framework.TestCase.assertSame;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ParkingBoyTest {
+public class GraduateParkingBoyTest {
 
     @Test
     void should_return_ticket_when_park_given_two_parking_lots_both_has_available_spaces_managed_by_parking_boy() {
         ParkingLot firstParkingLot = new ParkingLot(2);
         ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(firstParkingLot, secondParkingLot));
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(Arrays.asList(firstParkingLot, secondParkingLot));
         Car car = new Car();
 
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = graduateParkingBoy.park(car);
 
         assertNotNull(ticket);
         assertSame(firstParkingLot.pick(ticket), car);
@@ -28,10 +28,10 @@ public class ParkingBoyTest {
     void should_return_ticket_when_park_given_two_parking_lots_one_has_available_spaces_managed_by_parking_boy() {
         ParkingLot firstParkingLot = buildFullParkingLot();
         ParkingLot secondParkingLot = new ParkingLot(2);
-        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(firstParkingLot, secondParkingLot));
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(Arrays.asList(firstParkingLot, secondParkingLot));
         Car car = new Car();
 
-        Ticket ticket = parkingBoy.park(car);
+        Ticket ticket = graduateParkingBoy.park(car);
 
         assertNotNull(ticket);
         assertThrows(CarNotMatchException.class, () -> firstParkingLot.pick(ticket));
@@ -42,21 +42,21 @@ public class ParkingBoyTest {
     void should_return_error_when_park_given_two_full_parking_lots_managed_by_parking_boy() {
         ParkingLot firstParkingLot = buildFullParkingLot();
         ParkingLot secondParkingLot = buildFullParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(firstParkingLot, secondParkingLot));
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(Arrays.asList(firstParkingLot, secondParkingLot));
         Car car = new Car();
 
-        assertThrows(NoSpaceAvailableException.class, () -> parkingBoy.park(car));
+        assertThrows(NoSpaceAvailableException.class, () -> graduateParkingBoy.park(car));
     }
 
     @Test
     void should_return_car_when_pick_given_two_parking_lots_managed_by_parking_boy_parked_corresponding_car() {
         ParkingLot firstParkingLot = new ParkingLot(2);
         ParkingLot secondParkingLot = new ParkingLot(3);
-        ParkingBoy parkingBoy = new ParkingBoy(Arrays.asList(firstParkingLot, secondParkingLot));
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(Arrays.asList(firstParkingLot, secondParkingLot));
         Car myCar = new Car();
-        Ticket myTicket = parkingBoy.park(myCar);
+        Ticket myTicket = graduateParkingBoy.park(myCar);
 
-        Car pickedCar = parkingBoy.pick(myTicket);
+        Car pickedCar = graduateParkingBoy.pick(myTicket);
 
         assertSame(pickedCar, myCar);
     }
@@ -65,9 +65,9 @@ public class ParkingBoyTest {
     void should_return_error_when_pick_given_two_parking_lots_managed_by_parking_boy_without_corresponding_car() {
         ParkingLot fistParkingLot = new ParkingLot(2);
         ParkingLot secondParkingLot =new ParkingLot(3);
-        ParkingBoy parkingboy =  new ParkingBoy(Arrays.asList(fistParkingLot,secondParkingLot));
+        GraduateParkingBoy graduateParkingBoy =  new GraduateParkingBoy(Arrays.asList(fistParkingLot,secondParkingLot));
 
-        assertThrows(CarNotMatchException.class,()->parkingboy.pick(new Ticket()));
+        assertThrows(CarNotMatchException.class,()->graduateParkingBoy.pick(new Ticket()));
     }
 
     private ParkingLot buildFullParkingLot() {
